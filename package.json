@@ -1,0 +1,23 @@
+{
+  "name": "bookingapp",
+  "version": "1.0.0",
+  "description": "creating booking app with nodejs and react",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jayakrishna77/bookingapp.git"
+  },
+  "keywords": [
+    "booking",
+    "app"
+  ],
+  "author": "Jaya Krishna",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jayakrishna77/bookingapp/issues"
+  },
+  "homepage": "https://github.com/jayakrishna77/bookingapp#readme"
+}
