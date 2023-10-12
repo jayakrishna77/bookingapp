@@ -2,6 +2,7 @@ const http = require('http');
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 //importing local files
 const authRoute = require('./routes/auth.js');
@@ -45,6 +46,7 @@ mongoose.connection.on("connection", () => {
 //middlewares
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 
 app.use("/api/auth", authRoute);
 app.use('/api/rooms', roomsRoute);
@@ -52,7 +54,7 @@ app.use('/api/hotels', hotelsRoute);
 app.use('/api/users', usersRoute);
 
 
-// error handling middlewarez
+// error handling middlewares
 app.use((err, req, res, next) => {
     const errorStatus = err.status || 500;
     const errorMessage = err.message || "Somthing went wrong!";

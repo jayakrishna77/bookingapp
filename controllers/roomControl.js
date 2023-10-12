@@ -1,5 +1,5 @@
-const Room = require('../models/RoomModel.js');
-const Hotel = require('../models/HotelModel.js');
+const Room = require('../models/RoomModel');
+const Hotel = require('../models/HotelModel');
 
 const createRoom = async (req, res, next) => {
     const hotelId = req.params.hotelid;
@@ -38,6 +38,22 @@ const updateRoom = async (req, res, next) => {
     }
 }
 
+const updateRoomAvailability = async (req, res, next) => {
+    try {
+        await Room.updateOne(
+            {"roomNumbers._id" : req.params.id},
+            {
+                $push:{
+                    "roomNumbers.$.unavailableDates": req.body.dates
+                }
+            }
+        )
+        res.status(200).json("Room data updated")
+    } catch (err) {
+        next(err);
+    }
+}
+
 const deleteRoom = async (req, res, next) => {
     const hotelId = req.params.hotelid;
     try {
@@ -62,4 +78,11 @@ const getRooms = async (req, res, next) => {
     }
 }
 
-module.exports = { createRoom, getRoom, updateRoom, deleteRoom, getRooms }
+module.exports = { 
+    createRoom, 
+    getRoom, 
+    updateRoom, 
+    deleteRoom, 
+    getRooms,
+    updateRoomAvailability
+ }

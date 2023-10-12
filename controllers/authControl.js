@@ -1,14 +1,15 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const User = require("../models/AuthModel.js");
-const createError = require('../utils/error.js');
+const User = require("../models/AuthModel");
+const createError = require('../utils/error');
 
 const register = async (req, res, next) => {
     const salt = bcrypt.genSaltSync(10);
     const hashPassword = bcrypt.hashSync(req.body.password, salt);
     try {
         const newUser = new User({
+            ...req.body,
             name: req.body.name,
             password: hashPassword,
             email: req.body.email,
@@ -34,7 +35,7 @@ const login = async (req, res, next) => {
         res
         .cookie("access_token", token, { httpOnly: true })
         .status(200)
-        .send({ ...otherDetails });
+        .send({ details:{...otherDetails}, isAdmin });
     } catch (err) {
         next(err);
     }

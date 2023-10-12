@@ -1,4 +1,4 @@
-const User = require("../models/AuthModel.js");
+const User = require("../models/AuthModel");
 
 const getUser = async (req, res, next) => {
     try {
